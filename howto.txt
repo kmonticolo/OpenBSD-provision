@@ -1,0 +1,180 @@
+
+instalacja openbsd na mint
+
+https://www.tumfatig.net/20161124/encrypted-openbsd-6-0-in-the-ovh-cloud/
+
+cwiczenia na vagrancie agent03.example.com centos7 -> openbsd 6.0
+
+sudo su
+cd /boot
+wget http://ftp.fr.openbsd.org/pub/OpenBSD/6.0/amd64/bsd.rd
+
+ patch -p1 <grub_custom.patch /etc/grub.d/40_custom
+patching file /etc/grub.d/40_custom
+
+[root@agent03 ~]# cat grub_custom.patch
+
+cat >grub_custom.patch <<EOF
+--- /etc/grub.d/40_custom.orig  2015-05-13 20:33:36.000000000 +0200
++++ /etc/grub.d/40_custom       2016-11-23 17:00:50.081495400 +0100
+@@ -4,2 +4,6 @@
+ # menu entries you want to add after this comment.  Be careful not to change
+ # the 'exec tail' line above.
++menuentry "OpenBSD" {
++       set root=(hd0,msdos1)
++       kopenbsd /bsd.rd
++}
+EOF
+
+patch -p1 <grub_default.patch /etc/default/grub
+
+[root@agent03 default]# diff -u2 /etc/default/grub.orig /etc/default/grub
+
+cat >grub_default.patch<<EOF
+--- /etc/default/grub.orig      2017-02-08 15:22:14.037205189 +0100
++++ /etc/default/grub   2017-02-08 15:25:31.718059686 +0100
+@@ -1,5 +1,7 @@
+ GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+-GRUB_DEFAULT=saved
++GRUB_DEFAULT=OpenBSD
+ GRUB_DISABLE_SUBMENU=true
+ GRUB_TERMINAL_OUTPUT="console"
+EOF
+
+
+ update-grub
+ lub
+  grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot
+
+
+haslo vagrant dla usera vagrant  
+  vagrant:$2b$09$L2Dj6eIMCSiYSuQpJENUROElgk0Sq1twtmdJnwgOfkD8FM/gRrBrC:1001:1001::0:0::/home/vagrant:/bin/ksh
+
+  na 10.57.129.181 httpd
+  ustawic w rc.conf
+  konfiguracja w /etc/httpd.conf
+  /etc/rc.d/httpd -f start
+  vi /var/www/htdocs/install.conf
+  
+ ### sciagnac paczki instalacyjne os: 
+ pub/OpenBSD/6.0/amd64
+ 
+ # history
+ 
+pkg_add wget
+mkdir -p /pub/OpenBSD/6.0/amd64/ && cd $_
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/SHA256 
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/SHA256.sig
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/index.txt	
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/bsd.mp
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/bsd
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/bsd.rd
+wget http://piotrkosoft.net/pub/OpenBSD/6.0/amd64/base60.tgz
+
+mkdir -p /var/www/pub/OpenBSD/6.0/packages/amd64/ && cd $_
+for i in `pkg_info -aq`; do wget piotrkosoft.net/`pwd`/$i.tgz;done
+#pkg_info -q
+augeas-1.5.0
+boost-1.58.0p2
+bzip2-1.0.6p8
+curl-7.49.0
+facter-3.1.8p1
+gcc-libs-4.9.3p9
+gettext-0.19.7
+gmp-5.0.2p3
+gtar-1.29
+libffi-3.2.1p2
+libiconv-1.14p3
+libidn-1.32p1
+libpsl-0.13.0
+libunistring-0.9.6p0
+libxml-2.9.3
+libyaml-0.1.6p1
+nghttp2-1.12.0
+pcre-8.38p0
+puppet-4.5.2p0
+quirks-2.241
+rsync-3.1.2p0
+ruby-2.2.5p1
+ruby22-augeas-0.5.0p3
+ruby22-deep_merge-1.0.1
+ruby22-hiera3-3.2.0
+ruby22-json_pure-1.8.2
+ruby22-rgen-0.8.1
+ruby22-shadow-2.5.0p0
+sudo-1.8.17.1
+wget-1.18
+xz-5.2.2p0
+yaml-cpp-0.5.1p2
+
+
+
+cp /var/www/htdocs/site60.tgz .
+ls -l site60.tgz  >>index.txt
+
+
+
+ na serwerze www:
+ 
+ httpd.conf
+ server "default" {
+        listen on "*" port 80
+		        root "/"
+}
+
+
+
+instalacja puppet4.10
+
+
+ 
+  
+  System hostname = server1
+Password for root = $2b$09$L2Dj6eIMCSiYSuQpJENUROElgk0Sq1twtmdJnwgOfkD8FM/gRrBrC
+Change the default console to com0 = no
+Do you expect to run the X Window System? = no
+Setup a user = vagrant
+Password for user = $2b$09$L2Dj6eIMCSiYSuQpJENUROElgk0Sq1twtmdJnwgOfkD8FM/gRrBrC
+Public ssh key for user = ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6
+A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYe
+t2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RG
+L+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXz
+cWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
+What timezone are you in = Europe/Warsaw
+Location of sets = http
+HTTP Server = piotrkosoft.net
+Set name(s) = -* bsd* base* 
+Location of sets = http
+HTTP Server = h 	
+Set name(s) = site60.tgz
+Checksum test for site60.tgz failed. Continue anyway = yes
+Unverified sets: site60.tgz. Continue without verification = yes
+
+autoinstalacja 
+na agent03 cp /bsd.rd /bsd
+reboot
+
+ a (od autoinstall)
+ enter
+ response file location http://10.57.129.181/ trzeba podac z pelnym http
+ 
+ # na serwerze www:
+ echo pkg_add puppet-4.5.2p0 rsync-3.1.2p0 sudo-1.8.17.1 > /etc/rc.firsttime
+ grep -q puppet /etc/hosts || echo "10.57.129.182	puppet" >>/etc/hosts
+ echo 'installpath = 10.57.129.182/pub/OpenBSD/6.0/packages/amd64/' >/etc/pkg.conf
+ tar zcphf /var/www/pub/OpenBSD/6.0/amd64/site60.tgz /etc/rc.firsttime  /etc/sudoers
+ 
+ i=/var/www/pub/OpenBSD/6.0/amd64/index.txt; grep -q site $i || ls -l site60.tgz >>$i
+
+
+#instalacja puppet4.10
+
+{ ~ }  » cd foreman-vagrant-centos_7                                                   ~
+{ foreman-vagrant-centos_7 }  » vagrant                       ~/foreman-vagrant-centos_7
+{ foreman-vagrant-centos_7 }  » vagrant ssh agent03.example.com
+vagrant@127.0.0.1's password:
+OpenBSD 6.0 (GENERIC) #2148: Tue Jul 26 12:55:20 MDT 2016
+
+  todo
+  podmiana kernela na mp na guescie
