@@ -34,7 +34,7 @@ cat >grub_default.patch<<EOF
 --- /etc/default/grub.orig      2017-02-08 15:22:14.037205189 +0100
 +++ /etc/default/grub   2017-02-08 15:25:31.718059686 +0100
 @@ -1,5 +1,7 @@
- GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+ GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release) || echo Debian"
 -GRUB_DEFAULT=saved
 +GRUB_DEFAULT=OpenBSD
  GRUB_DISABLE_SUBMENU=true
