@@ -1,0 +1,76 @@
+pkg_add dhcpcd
+
+vi /etc/dhcpd.conf
+
+option domain-name-servers 192.168.1.1;
+subnet 192.168.1.0 netmask 255.255.255.0 {
+    option routers 192.168.1.1;
+    filename "auto_install";
+    next-server 192.168.1.1;
+    range 192.168.1.8 192.168.1.254;
+}
+
+/etc/rc.d/dhcpd -f restart 
+dhcpd(ok)
+
+ ps auxw|grep dhcpd
+
+
+mkdir /tftp
+cd /tftp
+ln -s pxeboot auto_install
+ftp -o /tftp/bsd.rd http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd.rd
+ftp -o /tftp/pxeboot http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/pxeboot
+cp /bsd.rd bsd
+ 
+
+echo 'tftpd_flags="-4 /tftp"' >> /etc/rc.conf.local
+/etc/rc.d/tftpd start
+
+mkdir -p /var/www/htdocs/pub/OpenBSD/6.2/amd64
+
+
+ ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256 http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256 
+
+ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256.sig http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256.sig
+
+ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/base62.tgz http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/base62.tgz 
+
+ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd 
+ 
+ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd.mp http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd.mp
+
+
+ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/index.txt http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/index.txt
+
+ vi /etc/httpd.conf
+                                                                                                                                                                                                                       
+server "default" {
+        listen on egress port 80
+        root "/htdocs"
+        directory auto index
+}
+
+ echo 'httpd_flags=""' >> /etc/rc.conf.local
+ /etc/rc.d/httpd start
+
+Be sure to allow TCP port 80 in your firewall for the LAN. We also need a file called "install.conf" in the document root of the webserver. It answers some (or all) of the installer's questions for us. In my case, that would be something like:
+
+# cat /var/www/htdocs/install.conf
+
+System hostname = bsdnow.tv
+Password for root = ThePlaceToBe...SD
+Network interfaces = em0
+IPv4 address for em0 = dhcp
+Setup a user = puffy
+Password for user = whywasibornasafish
+What timezone are you in = US/Eastern
+Location of sets = http
+Server = 192.168.1.1
+
+add line to "additional dnsmasq options" in dd-wrt router configuration:
+dhcp-boot=pxeboot,192.168.1.140,192.168.1.140
+
+in above case don't run dhcpd on openbsd server, just tftpd and httpd.
+
+
