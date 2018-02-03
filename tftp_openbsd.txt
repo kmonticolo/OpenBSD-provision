@@ -56,6 +56,9 @@ server "default" {
 
 Be sure to allow TCP port 80 in your firewall for the LAN. We also need a file called "install.conf" in the document root of the webserver. It answers some (or all) of the installer's questions for us. In my case, that would be something like:
 
+# install or upgrade
+echo install >/var/www/htdocs/mode.conf   
+
 # cat /var/www/htdocs/install.conf
 
 System hostname = bsdnow.tv
@@ -69,7 +72,9 @@ Location of sets = http
 Server = 192.168.1.1
 
 add line to "additional dnsmasq options" in dd-wrt router configuration:
-dhcp-boot=pxeboot,192.168.1.140,192.168.1.140
+dhcp-boot=auto_install,192.168.1.140,192.168.1.140
+
+note that first value is important (can be auto_install or auto_upgrade) and it points that machine is to be installed or upgraded.
 
 in above case don't run dhcpd on openbsd server, just tftpd and httpd.
 
