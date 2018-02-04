@@ -30,18 +30,13 @@ echo 'tftpd_flags="-4 /tftp"' >> /etc/rc.conf.local
 mkdir -p /var/www/htdocs/pub/OpenBSD/6.2/amd64
 
 
- ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256 http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256 
-
-ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256.sig http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256.sig
-
-ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/base62.tgz http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/base62.tgz 
-
-ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd 
- 
-ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd.mp http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd.mp
-
-
-ftp -o //var/www/htdocs/pub/OpenBSD/6.2/amd64/index.txt http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/index.txt
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256 http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256 
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256.sig http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/SHA256.sig
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/base62.tgz http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/base62.tgz 
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd 
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/bsd.mp http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/bsd.mp
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/INSTALL.amd64 http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/INSTALL.amd64
+ftp -o /var/www/htdocs/pub/OpenBSD/6.2/amd64/index.txt http://ftp.icm.edu.pl/pub/OpenBSD/6.2/amd64/index.txt
 
  vi /etc/httpd.conf
                                                                                                                                                                                                                        
@@ -80,4 +75,7 @@ in above case don't run dhcpd on openbsd server, just tftpd and httpd.
 
 tar zcphf site62.tgz /root/.ssh/authorized_keys 
 cp site62.tgz /var/www/htdocs/pub/OpenBSD/6.2/amd64/
+sha256 /var/www/htdocs/pub/OpenBSD/6.2/amd64/site62.tgz  >> /var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256
+sha256 /var/www/htdocs/pub/OpenBSD/6.2/amd64/site62.tgz  >> /var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256.sig
 
+ls -l >>/var/www/htdocs/pub/OpenBSD/6.2/amd64/index.txt
