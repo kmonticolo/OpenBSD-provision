@@ -78,4 +78,6 @@ note that first value is important (can be auto_install or auto_upgrade) and it 
 
 in above case don't run dhcpd on openbsd server, just tftpd and httpd.
 
+tar zcphf site62.tgz /root/.ssh/authorized_keys 
+cp site62.tgz /var/www/htdocs/pub/OpenBSD/6.2/amd64/
 
