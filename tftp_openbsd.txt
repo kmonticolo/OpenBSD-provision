@@ -79,3 +79,15 @@ sha256 /var/www/htdocs/pub/OpenBSD/6.2/amd64/site62.tgz  >> /var/www/htdocs/pub/
 sha256 /var/www/htdocs/pub/OpenBSD/6.2/amd64/site62.tgz  >> /var/www/htdocs/pub/OpenBSD/6.2/amd64/SHA256.sig
 
 ls -l >>/var/www/htdocs/pub/OpenBSD/6.2/amd64/index.txt
+
+mkdir -p /var/www/htdocs/pub/OpenBSD/6.2/packages/amd64/
+
+cd /var/www/htdocs/pub/OpenBSD/6.2/packages/amd64/
+ftp -o git-2.14.2.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/git-2.14.2.tgz 
+ftp -o puppet-4.10.7.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/puppet-4.10.7.tgz
+ftp -o curl-7.55.1.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/curl-7.55.1.tgz
+ftp -o rsync-3.1.2p0.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/rsync-3.1.2p0.tgz
+ftp -o cvsps-2.1p0.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/cvsps-2.1p0.tgz
+ftp -o gettext-0.19.8.1p1.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/gettext-0.19.8.1p1.tgz
+ftp -o p5-Error-0.17024.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/p5-Error-0.17024.tgz
+
