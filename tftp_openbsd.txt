@@ -101,4 +101,13 @@ wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-pgsql-7.0.23.tgz
 wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-zip-7.0.23.tgz
 wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/postgresql-server-9.6.5.tgz
 wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/quirks-2.367.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-hiera3-3.4.0.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-gettext-setup-0.25.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-locale-2.1.2.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/gtar-1.29.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby-2.3.5.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/facter-3.8.0.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-rgen-0.8.2.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-shadow-2.5.0p2.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/ruby23-augeas-0.5.0p4.tgz
 
