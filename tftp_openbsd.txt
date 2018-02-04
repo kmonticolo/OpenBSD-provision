@@ -91,3 +91,14 @@ ftp -o cvsps-2.1p0.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/cvsps
 ftp -o gettext-0.19.8.1p1.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/gettext-0.19.8.1p1.tgz
 ftp -o p5-Error-0.17024.tgz ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/p5-Error-0.17024.tgz
 
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/curl-7.55.1.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/owncloud-10.0.3.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-curl-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-gd-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-pdo_pgsql-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-pgsql-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/php-zip-7.0.23.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/postgresql-server-9.6.5.tgz
+wget ftp://ftp.icm.edu.pl/pub/OpenBSD/6.2/packages/amd64/quirks-2.367.tgz
+
